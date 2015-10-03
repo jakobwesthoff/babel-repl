@@ -63,6 +63,22 @@ gulp.task("optimize:index", function(next) {
     execLive("./node_modules/.bin/html-dist Distribution/index.html --remove-all --minify --insert bundle.js -o Distribution/index.html", next);
 });
 
+gulp.task("release", function (next) {
+    run("default", function() {
+        execLive("git branch -D workshop-shell && \
+                  git checkout --orphan workshop-shell && \
+                  git rm -r --cached Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
+                  rm -rf Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
+                  rm -rf node_modules jspm_packages \
+                  mv Distribution/* . && \
+                  rm -rf Distribution && \
+                  git add * && \
+                  git ci -m Release && \
+                  git push -f origin workshop-shell && \
+                  git checkout master", next);
+    });
+});
+
 
 gulp.task("default", function(next) {
     run(
