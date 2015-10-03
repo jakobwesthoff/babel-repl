@@ -69,7 +69,7 @@ gulp.task("release", function (next) {
                   git checkout --orphan workshop-shell && \
                   git rm -r --cached Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
                   rm -rf Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
-                  rm -rf node_modules jspm_packages \
+                  rm -rf node_modules jspm_packages && \
                   mv Distribution/* . && \
                   rm -rf Distribution && \
                   git add * && \
