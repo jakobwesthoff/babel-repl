@@ -37,6 +37,13 @@ body, #root {
 }
 
 .controls {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+
     position: absolute;
     top: 0;
     right: 0;
@@ -46,6 +53,7 @@ body, #root {
     padding: 10px;
 
     > div {
+        display: inline-block;
         transition: all ease-in .3s;
         opacity: .5;
         &:hover {
@@ -55,10 +63,9 @@ body, #root {
         }
     }
 
-    i:not(:last-child) {
+    > div:not(:last-child) {
         margin-right: 10px;
     }
-
 
     > i {
         display: inline-block;

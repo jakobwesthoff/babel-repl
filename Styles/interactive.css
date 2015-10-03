@@ -21,6 +21,12 @@ body, #root {
   height: 100%; }
 
 .controls {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
   position: absolute;
   top: 0;
   right: 0;
@@ -29,13 +35,14 @@ body, #root {
   color: #B6B6B6;
   padding: 10px; }
   .controls > div {
+    display: inline-block;
     transition: all ease-in .3s;
     opacity: .5; }
     .controls > div:hover {
       opacity: 1;
       color: #FFC107;
       cursor: pointer; }
-  .controls i:not(:last-child) {
+  .controls > div:not(:last-child) {
     margin-right: 10px; }
   .controls > i {
     display: inline-block; }

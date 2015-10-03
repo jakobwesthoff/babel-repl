@@ -49,6 +49,16 @@ gulp.task("copy:html", function() {
         .pipe(gulp.dest("Distribution/"));
 });
 
+gulp.task("copy:styles", function() {
+    return gulp.src("Styles/**/*")
+        .pipe(gulp.dest("Distribution/Styles/"));
+});
+
+gulp.task("copy:fonts", function() {
+    return gulp.src("jspm_packages/npm/font-awesome@4.4.0/fonts/**/*")
+        .pipe(gulp.dest("Distribution/jspm_packages/npm/font-awesome@4.4.0/fonts/"));
+});
+
 gulp.task("optimize:index", function(next) {
     execLive("./node_modules/.bin/html-dist Distribution/index.html --remove-all --minify --insert bundle.js -o Distribution/index.html", next);
 });
@@ -58,9 +68,11 @@ gulp.task("default", function(next) {
     run(
         "clean",
         "copy:html",
+        "copy:styles",
+        "copy:fonts",
         "optimize:index",
         "bundle",
-        "optimize:js", 
+        "optimize:js",
         next
     );
 });

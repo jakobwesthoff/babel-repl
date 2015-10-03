@@ -1,5 +1,6 @@
 import React, {Component} from "react";
 import CodeMirror from "../Components/CodeMirror";
+import OutputPane from "../Components/OutputPane";
 import Babel from "babel-core";
 import _ from "lodash";
 
@@ -20,7 +21,8 @@ export default class PlaygroundApp extends Component {
             readOnly: true,
             mode: "javascript",
             theme: "monokai"
-        }
+        },
+        jsvisible: true
     }
 
     constructor() {
@@ -35,7 +37,7 @@ export default class PlaygroundApp extends Component {
 
     render() {
         const {es6value, jsvalue, viewportHeight, viewportWidth,
-               es6options, jsoptions} = this.state;
+               es6options, jsoptions, jsvisible} = this.state;
 
         return (
             <div>
@@ -46,22 +48,30 @@ export default class PlaygroundApp extends Component {
                                         options={es6options}
                                         onChange={this.onES6Change}
                                         height={viewportHeight}
-                                        width={Math.ceil(viewportWidth/2)} />
+                                        width={jsvisible ? Math.ceil(viewportWidth/2) : viewportWidth} />
                         </td>
-                        <td className="editor">
+                        <td className="editor" style={{display: jsvisible ? "inherit" : "none"}}>
                             <CodeMirror value={jsvalue}
                                         options={jsoptions}
                                         onChange={this.onJSChange}
                                         height={viewportHeight}
                                         width={Math.floor(viewportWidth/2)} />
-                            <div className="controls">
-                                <div onClick={this.onJSRunClick}>
-                                    <i className="fa fa-play-circle-o fa-lg" />
-                                </div>
-                            </div>
                         </td>
                     </tr>
+                    <tr>
+                    <td colSpan={2}>
+                        <OutputPane />
+                    </td>
+                    </tr>
                 </table>
+                <div className="controls">
+                    <div onClick={this.onJSHideClick}>
+                        <i className="fa fa-code fa-lg" />
+                    </div>
+                    <div onClick={this.onJSRunClick}>
+                        <i className="fa fa-play-circle-o fa-lg" />
+                    </div>
+                </div>
             </div>
         );
     }
@@ -96,6 +106,12 @@ export default class PlaygroundApp extends Component {
         }
 
         eval(jsvalue);
+    }
+
+    onJSHideClick = () => {
+        this.setState({
+            jsvisible: !this.state.jsvisible
+        });
     }
 
     componentDidMount() {

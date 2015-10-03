@@ -13,10 +13,14 @@ export default class CodeMirror extends Component {
         width: PropTypes.number.isRequired
     }
 
+    static defaultProps = {
+        display: "inherit"
+    }
+
     ignoreNextUpdate = false
 
     render() {
-        const {height, width} = this.props;
+        const {height, width, display} = this.props;
 
         return (
             <div ref="container" style={{height: `${height}px`, width: `${width}px`}}></div>
