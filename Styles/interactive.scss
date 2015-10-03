@@ -1,0 +1,67 @@
+$alertColor: #FF5722;
+$lightAlertColor: #FCA003;
+$emphazizeColor: #FFC107;
+$lightEmphazizeColor: #FFECB3;
+$textColor: #212121;
+$lightTextColor: #727272;
+$disabledTextColor: #B6B6B6;
+
+* {
+    box-sizing: border-box;
+}
+
+body, #root {
+    height: 100%;
+    font-size: 120%;
+    font-family: "Helvetica Neue", Helvetica, Arial, sans-serif
+}
+
+.comparisonView {
+    width: 100%;
+    height: 100%;
+
+    tr {
+        width: 100%;
+
+        td.editor {
+            position: relative;
+            width: 50%;
+            height: 100%;
+            vertical-align: top;
+        }
+    }
+}
+
+.CodeMirror {
+    height: 100%;
+}
+
+.controls {
+    position: absolute;
+    top: 0;
+    right: 0;
+    z-index: 100;
+    display: inline-block;
+    color: $disabledTextColor;
+    padding: 10px;
+
+    > div {
+        transition: all ease-in .3s;
+        opacity: .5;
+        &:hover {
+            opacity: 1;
+            color: $emphazizeColor;
+            cursor: pointer;
+        }
+    }
+
+    i:not(:last-child) {
+        margin-right: 10px;
+    }
+
+
+    > i {
+        display: inline-block;
+    }
+
+}
