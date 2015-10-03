@@ -65,7 +65,7 @@ gulp.task("optimize:index", function(next) {
 
 gulp.task("release", function (next) {
     run("default", function() {
-        execLive("git branch -D workshop-shell && \
+        execLive("git branch -D workshop-shell ; \
                   git checkout --orphan workshop-shell && \
                   git rm -r --cached Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
                   rm -rf Gulpfile.js  Library  README.md  Styles  config.js  index.html  package.json && \
