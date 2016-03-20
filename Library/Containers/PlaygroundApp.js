@@ -1,4 +1,6 @@
 import React, {Component} from "react";
+import ReactDOM from "react-dom";
+import ReactDOMServer from "react-dom/server";
 import CodeMirror from "../Components/CodeMirror";
 import OutputPane from "../Components/OutputPane";
 import Babel from "babel-core";
@@ -42,27 +44,29 @@ export default class PlaygroundApp extends Component {
         return (
             <div>
                 <table className="comparisonView">
-                    <tr>
-                        <td className="editor">
-                            <CodeMirror value={es6value}
-                                        options={es6options}
-                                        onChange={this.onES6Change}
-                                        height={viewportHeight}
-                                        width={jsvisible ? Math.ceil(viewportWidth/2) : viewportWidth} />
+                    <tbody>
+                        <tr>
+                            <td className="editor">
+                                <CodeMirror value={es6value}
+                                            options={es6options}
+                                            onChange={this.onES6Change}
+                                            height={viewportHeight}
+                                            width={jsvisible ? Math.ceil(viewportWidth/2) : viewportWidth} />
+                            </td>
+                            <td className="editor" style={{display: jsvisible ? "inherit" : "none"}}>
+                                <CodeMirror value={jsvalue}
+                                            options={jsoptions}
+                                            onChange={this.onJSChange}
+                                            height={viewportHeight}
+                                            width={Math.floor(viewportWidth/2)} />
+                            </td>
+                        </tr>
+                        <tr>
+                        <td colSpan={2}>
+                            <OutputPane />
                         </td>
-                        <td className="editor" style={{display: jsvisible ? "inherit" : "none"}}>
-                            <CodeMirror value={jsvalue}
-                                        options={jsoptions}
-                                        onChange={this.onJSChange}
-                                        height={viewportHeight}
-                                        width={Math.floor(viewportWidth/2)} />
-                        </td>
-                    </tr>
-                    <tr>
-                    <td colSpan={2}>
-                        <OutputPane />
-                    </td>
-                    </tr>
+                        </tr>
+                    </tbody>
                 </table>
                 <div className="controls">
                     <div onClick={this.onJSHideClick}>

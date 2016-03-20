@@ -29,7 +29,7 @@ export default class CodeMirror extends Component {
 
     componentDidMount() {
         const options = Object.assign({}, {value: this.props.value}, this.props.options);
-        const container = this.refs.container.getDOMNode();
+        const container = this.refs.container;
         this.codeMirror = cm(container, options);
         this.codeMirror.refresh();
         this.codeMirror.on("changes", this.onChange);

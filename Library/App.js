@@ -1,4 +1,5 @@
 import React from "react";
+import ReactDOM from "react-dom";
 import PlaygroundApp from "./Containers/PlaygroundApp";
 
 import "../Styles/reset.css!";
@@ -9,7 +10,7 @@ import "codemirror/theme/solarized.css!"
 import "font-awesome/css/font-awesome.css!"
 import "bootstrap/css/bootstrap.css!"
 
-React.render(
+ReactDOM.render(
   <PlaygroundApp />,
   document.getElementById('root')
 );
