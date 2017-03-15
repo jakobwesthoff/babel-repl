@@ -3,8 +3,8 @@ import ReactDOM from "react-dom";
 import ReactDOMServer from "react-dom/server";
 import CodeMirror from "../Components/CodeMirror";
 import OutputPane from "../Components/OutputPane";
-import Babel from "babel-core";
 import _ from "lodash";
+import "script-loader!babel-standalone/babel.min.js";
 
 export default class PlaygroundApp extends Component {
     state = {
@@ -108,8 +108,13 @@ export default class PlaygroundApp extends Component {
             console.error("Can't execute invalid ES6 code!");
             return;
         }
-
+        const oldWindowReact = window.React;
+        const oldWindowReactDOM = window.ReactDOM;
+        window['React'] = React;
+        window['ReactDOM'] = ReactDOM;
         eval(jsvalue);
+        window['React'] = oldWindowReact;
+        window['ReactDOM'] = oldWindowReactDOM;
     }
 
     onJSHideClick = () => {
@@ -132,7 +137,17 @@ export default class PlaygroundApp extends Component {
         const {jsoptions} = this.state;
 
         try {
-            const transformation = Babel.transform(value, {stage: 0});
+            const transformation = Babel.transform(
+              value,
+              {
+                presets: ['latest'],
+                "plugins": [
+                  "transform-react-jsx",
+                  "transform-object-rest-spread",
+                  "transform-class-properties",
+                ]
+              }
+            );
             this.setState({
                 jsvalue: transformation.code,
                 jsoptions: {...jsoptions, lineNumbers: true},

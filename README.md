@@ -2,10 +2,13 @@
 
 ## Prerequisites
 
-    $ npm install -g babel-core jspm gulp
+    $ npm install -g gulp
 
 ## Installation
 
-    $ npm install
-    $ jspm install
+    $ yarn install
     $ gulp
+
+## Dev-Server
+
+    $ gulp serve
